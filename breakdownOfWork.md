@@ -9,13 +9,11 @@ I worked on the following tasks:
 Rodolf John Gayem:
 I worked on the following tasks:
 
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
-2. <Insert Some Task Here> - This task is responsible for xyz functionality.
-3. <Insert Some Task Here> - This task is responsible for xyz functionality.
+1. <Delete a reminder> - This task is responsible for deleting reminders.
+2. <Edit a reminder> - This task is responsible for editing a reminder.
 
 Clinton Wong:
 I worked on the following tasks:
 
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
-2. <Insert Some Task Here> - This task is responsible for xyz functionality.
-3. <Insert Some Task Here> - This task is responsible for xyz functionality.
+1. <Delete a reminder> - This task is responsible for deleting reminders.
+2. <Edit a reminder> - This task is responsible for editing a reminder.
