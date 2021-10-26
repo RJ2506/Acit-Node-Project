@@ -1,4 +1,5 @@
 November 2th (First Sprint Complete)
+
 Andrew Graystone:
 I worked on the following tasks:
 
