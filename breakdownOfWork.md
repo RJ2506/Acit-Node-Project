@@ -12,8 +12,9 @@ I worked on the following tasks:
 1. <Delete a reminder> - This task is responsible for deleting reminders.
 2. <Edit a reminder> - This task is responsible for editing a reminder.
 
+October 27, 2021
+
 Clinton Wong:
 I worked on the following tasks:
 
-1. <Delete a reminder> - This task is responsible for deleting reminders.
-2. <Edit a reminder> - This task is responsible for editing a reminder.
+1. <Delete a reminder> Added the functionality to delete a reminder. - This task is responsible for deleting reminders.
