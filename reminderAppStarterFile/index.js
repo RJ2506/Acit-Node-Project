@@ -15,7 +15,7 @@ app.set("view engine", "ejs");
 
 // Routes start here
 
-app.get("/reminder", reminderController.list);
+app.get("/reminders", reminderController.list);
 
 app.get("/reminder/new", reminderController.new);
 
