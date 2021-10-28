@@ -9,10 +9,7 @@ I worked on the following tasks:
 Rodolf John Gayem:
 I worked on the following tasks:
 
-1. <Delete a reminder> - This task is responsible for deleting reminders.
-2. <Edit a reminder> - This task is responsible for editing a reminder.
-
-October 27, 2021
+1. <Edit a reminder> - Added the functionality to edit a reminder. -This task is responsible for editing reminders.
 
 Clinton Wong:
 I worked on the following tasks:
