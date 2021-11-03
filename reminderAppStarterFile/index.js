@@ -13,6 +13,10 @@ app.use(ejsLayouts);
 
 app.set("view engine", "ejs");
 
+const passport = require("./middleware/passport");
+const authRoute = require("./routes/authRoute");
+const indexRoute = require("./routes/indexRoute")
+
 // Routes start here
 
 app.get("/reminders", reminderController.list);
