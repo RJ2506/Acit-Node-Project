@@ -4,6 +4,7 @@ const path = require("path");
 const ejsLayouts = require("express-ejs-layouts");
 const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
+const session = require("express-session")
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -15,7 +16,13 @@ app.set("view engine", "ejs");
 
 const passport = require("./middleware/passport");
 const authRoute = require("./routes/authRoute");
-const indexRoute = require("./routes/indexRoute")
+const indexRoute = require("./routes/indexRoute.js")
+
+// Middleware for express
+
+app.use(express.json());
+app.use(expressLayouts);
+app.use(express.urlencoded({ extended: true }));
 
 // Routes start here
 
