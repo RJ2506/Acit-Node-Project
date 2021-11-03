@@ -15,3 +15,10 @@ Clinton Wong:
 I worked on the following tasks:
 
 1. <Delete a reminder> Added the functionality to delete a reminder. - This task is responsible for deleting reminders.
+
+November 9th (Second Sprint)
+
+Andrew Graystone:
+I worked on the following task:
+
+1. Add Local Login and Registration.
