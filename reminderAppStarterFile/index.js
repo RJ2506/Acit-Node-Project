@@ -21,8 +21,10 @@ const indexRoute = require("./routes/indexRoute.js")
 // Middleware for express
 
 app.use(express.json());
-app.use(expressLayouts);
+app.use(ejsLayouts);
 app.use(express.urlencoded({ extended: true }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Routes start here
 
