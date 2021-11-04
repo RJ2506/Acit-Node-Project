@@ -6,6 +6,8 @@ const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
 const session = require("express-session");
 
+require("dotenv").config();
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.urlencoded({ extended: false }));
@@ -31,8 +33,10 @@ const passport = require("./middleware/passport");
 const authRoute = require("./routes/authRoute");
 const indexROute = require("./routes/indexRoute");
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.localLogin.initialize());
+app.use(passport.localLogin.session());
+app.use(passport.githubLogin.initialize());
+app.use(passport.githubLogin.session());
 
 const { ensureAuthenticated } = require("./middleware/checkAuth.js");
 
