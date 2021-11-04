@@ -4,7 +4,7 @@ const path = require("path");
 const ejsLayouts = require("express-ejs-layouts");
 const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
-const session = require("express-session")
+const session = require("express-session");
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -15,29 +15,28 @@ app.use(ejsLayouts);
 app.set("view engine", "ejs");
 
 app.use(
-  session({
-    secret: "secret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-      maxAge: 24 * 60 * 60 * 1000,
-    },
-  })
+    session({
+        secret: "secret",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            secure: false,
+            maxAge: 24 * 60 * 60 * 1000,
+        },
+    })
 );
-
 
 const passport = require("./middleware/passport");
 const authRoute = require("./routes/authRoute");
+const indexROute = require("./routes/indexRoute");
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-const { ensureAuthenticated } = require("./middleware/checkAuth.js")
+const { ensureAuthenticated } = require("./middleware/checkAuth.js");
 
 // Middleware for express
-
 
 // Routes start here
 
@@ -57,11 +56,12 @@ app.post("/reminder/update/:id", reminderController.update);
 // Implement this yourself
 app.post("/reminder/delete/:id", reminderController.delete);
 
+app.use("/", indexROute);
 // Fix this to work with passport! The registration does not need to work, you can use the fake database for this.
 app.use("/auth", authRoute);
 
-app.listen(3001, function () {
-  console.log(
-    "Server running. Visit: localhost:3001/reminders in your browser 🚀"
-  );
+app.listen(3001, function() {
+    console.log(
+        "Server running. Visit: localhost:3001/reminders in your browser 🚀"
+    );
 });
