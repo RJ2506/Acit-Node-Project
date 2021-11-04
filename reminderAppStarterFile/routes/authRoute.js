@@ -17,7 +17,7 @@ router.get("/logout", (req, res) => {
 
 router.post(
     "/login",
-    passport.authenticate("local", {
+    passport.localLogin.authenticate("local", {
         successRedirect: "/dashboard",
         failureRedirect: "/auth/login",
     })
@@ -33,5 +33,21 @@ router.post("/register", (req, res) => {
     database["password"] = req.body.password;
     res.render("auth/login");
 });
+
+router.get(
+    "/github",
+    passport.githubLogin.authenticate("github", { scope: ["profile"] })
+);
+
+router.get(
+    "/github/callback",
+    passport.githubLogin.authenticate("github", {
+        failureRedirect: "/auth/login",
+    }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect("/dashboard");
+    }
+);
 
 module.exports = router;
