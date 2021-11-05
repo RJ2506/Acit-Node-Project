@@ -1,9 +1,11 @@
 <h1 class="mt-4">
     Dashboard</h1>
-<h2>
-    <img src="<%= user.photos %>  " alt="profile picture" width="20%">
-</h2>
-<p class="lead mb-3">Welcome
-    <%= user.name %>
-</p>
-<a href="/auth/logout" class="btn btn-secondary">Logout</a>
+<% if (user.photo !== undefined) {%>
+    <h2>
+        <img src="<%= user.photo %>  " alt="profile picture" width="20%">
+    </h2>
+    <% } %>
+        <p class="lead mb-3">Welcome
+            <%= user.name %>
+        </p>
+        <a href="/auth/logout" class="btn btn-secondary">Logout</a>
