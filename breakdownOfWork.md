@@ -22,3 +22,9 @@ Andrew Graystone:
 I worked on the following task:
 
 1. Add Local Login and Registration.
+  
+Rodolf John Gayem:
+I worked on the following tasks:
+
+1. Added another Strategy: Github login.
+2. Created the dashboard and logout route.
