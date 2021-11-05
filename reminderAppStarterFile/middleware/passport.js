@@ -10,7 +10,12 @@ const githubLogin = passport.use(
             callbackURL: "http://localhost:3001/auth/github/callback",
         },
         (accessToken, refreshToken, profile, done) => {
-            return done(null, profile);
+            let user = userController.getUserGit(profile);
+            return user ?
+                done(null, user) :
+                done(null, false, {
+                    message: "Your login details are not valid",
+                });
         }
     )
 );
