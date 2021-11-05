@@ -16,13 +16,6 @@ const database = [{
         email: "jonathan123@gmail.com",
         password: "jonathan123!",
     },
-    {
-        name: "RJ",
-        email: "rjgayem@gmail.com",
-        username: "RJ2506",
-        photos: "https://avatars.githubusercontent.com/u/77298403?v=4",
-        id: "77298403",
-    },
 ];
 
 const userModel = {
@@ -42,4 +35,21 @@ const userModel = {
     },
 };
 
-module.exports = { database, userModel };
+const userGit = {
+    findById: (profile) => {
+        let user = database.find((user) => user.id === profile.id);
+        if (user) {
+            return user;
+        }
+        database.push({
+            id: profile.id,
+            name: profile.displayName,
+            username: profile.username,
+            photo: profile.photos[0].value,
+        });
+        user = database.find((user) => user.id === profile.id);
+        return user;
+    },
+};
+
+module.exports = { database, userModel, userGit };
