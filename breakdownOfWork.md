@@ -21,7 +21,7 @@ November 9th (Second Sprint)
 Andrew Graystone:
 I worked on the following task:
 
-1. Add Local Login and Registration.
+1. Added Local Login and Registration.
   
 Rodolf John Gayem:
 I worked on the following tasks:
