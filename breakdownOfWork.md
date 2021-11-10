@@ -21,4 +21,17 @@ November 9th (Second Sprint)
 Andrew Graystone:
 I worked on the following task:
 
-1. Add Local Login and Registration.
+1. Added Local Login and Registration.
+  
+Rodolf John Gayem:
+I worked on the following tasks:
+
+1. Added another Strategy: Github login.
+2. Created the dashboard and logout route.
+
+November 15th (Third Sprint)
+
+Andrew Graystone:
+I worked on the following task:
+
+1. User's Should have a random profile picture generated for them when they sign up by using the UnsplashAPI. This profile picture should be saved in their profile. 
