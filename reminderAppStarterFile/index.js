@@ -32,6 +32,7 @@ app.use(
 const passport = require("./middleware/passport");
 const authRoute = require("./routes/authRoute");
 const indexROute = require("./routes/indexRoute");
+const uploadRoute = require("./routes/uploadRoute");
 
 app.use(passport.localLogin.initialize());
 app.use(passport.localLogin.session());
@@ -63,6 +64,8 @@ app.post("/reminder/delete/:id", reminderController.delete);
 app.use("/", indexROute);
 // Fix this to work with passport! The registration does not need to work, you can use the fake database for this.
 app.use("/auth", authRoute);
+
+app.use("/photo", uploadRoute);
 
 app.listen(3001, function() {
     console.log(
