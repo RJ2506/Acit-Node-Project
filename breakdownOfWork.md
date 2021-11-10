@@ -22,9 +22,16 @@ Andrew Graystone:
 I worked on the following task:
 
 1. Added Local Login and Registration.
-  
+
 Rodolf John Gayem:
 I worked on the following tasks:
 
 1. Added another Strategy: Github login.
 2. Created the dashboard and logout route.
+
+Clinton Kai Hin Wong:
+I worked on the following tasks:
+
+1. Added underlying features and support for admin panel.
+2. Added Admin Dashboard.
+3. Added access to /admin only for users with role: "admin".
