@@ -4,8 +4,12 @@
     <h2>
         <a href="/photo/upload"><img src="<%= user.photo %>  " alt="profile picture" width="20%"></a>
     </h2>
-    <% } %>
-        <p class="lead mb-3">Welcome
-            <%= user.name %>
-        </p>
-        <a href="/auth/logout" class="btn btn-secondary">Logout</a>
+    <% } else { %>
+        <h2>
+            <a href="/photo/upload"><img src="/default.jpg" alt="profile picture" width="20%"></a>
+        </h2>
+        <%}  %>
+            <p class="lead mb-3">Welcome
+                <%= user.name %>
+            </p>
+            <a href="/auth/logout" class="btn btn-secondary">Logout</a>
