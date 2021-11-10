@@ -13,7 +13,7 @@ let remindersController = {
     let sessionToDestroy = req.params.id;
     // console.log(sessionToDestroy);
     // console.log(Object.keys(req.session.store));
-    req.session.store.destroy(sessionToDestroy, function (err) {
+    req.sessionStore.destroy(sessionToDestroy, function (err) {
       console.log(err);
     });
     res.render("adminDash", { session: req.sessionStore.sessions });
