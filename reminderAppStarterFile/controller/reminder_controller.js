@@ -9,6 +9,16 @@ let remindersController = {
     res.render("reminder/create");
   },
 
+  revoke: (req, res) => {
+    let sessionToDestroy = req.params.id;
+    console.log(sessionToDestroy);
+    console.log(Object.keys(req.session.store));
+    req.session.store.destroy(sessionToDestroy, function (err) {
+      console.log(err);
+    });
+    res.render("adminDash", { session: req.sessionStore.sessions });
+  },
+
   listOne: (req, res) => {
     let reminderToFind = req.params.id;
     let searchResult = database.cindy.reminders.find(function (reminder) {
@@ -19,6 +29,11 @@ let remindersController = {
     } else {
       res.render("reminder/index", { reminders: database.cindy.reminders });
     }
+  },
+
+  admin: (req, res) => {
+    // console.log(JSON.parse(req.sessionStore.sessions));
+    res.render("adminDash", { session: req.sessionStore.sessions });
   },
 
   create: (req, res) => {

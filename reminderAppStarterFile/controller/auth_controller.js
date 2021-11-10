@@ -11,7 +11,7 @@ let authController = {
 
   loginSubmit: (req, res) => {
     // implement
-    res.render("/")
+    res.render("/");
   },
 
   registerSubmit: (req, res) => {
