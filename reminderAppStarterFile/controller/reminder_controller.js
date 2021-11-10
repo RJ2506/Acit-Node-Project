@@ -11,8 +11,8 @@ let remindersController = {
 
   revoke: (req, res) => {
     let sessionToDestroy = req.params.id;
-    console.log(sessionToDestroy);
-    console.log(Object.keys(req.session.store));
+    // console.log(sessionToDestroy);
+    // console.log(Object.keys(req.session.store));
     req.session.store.destroy(sessionToDestroy, function (err) {
       console.log(err);
     });
