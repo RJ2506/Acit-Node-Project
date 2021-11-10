@@ -17,16 +17,16 @@ app.use(ejsLayouts);
 app.set("view engine", "ejs");
 
 app.use(
-    session({
-        secret: "secret",
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            httpOnly: true,
-            secure: false,
-            maxAge: 24 * 60 * 60 * 1000,
-        },
-    })
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
 );
 
 const passport = require("./middleware/passport");
@@ -39,11 +39,14 @@ app.use(passport.localLogin.session());
 app.use(passport.githubLogin.initialize());
 app.use(passport.githubLogin.session());
 
-const { ensureAuthenticated } = require("./middleware/checkAuth.js");
+const { ensureAuthenticated, isAdmin } = require("./middleware/checkAuth.js");
 
 // Middleware for express
 
 // Routes start here
+app.get("/admin", isAdmin, reminderController.admin);
+
+app.get("/revoke/:id", isAdmin, reminderController.revoke);
 
 app.get("/reminders", ensureAuthenticated, reminderController.list);
 
@@ -65,6 +68,7 @@ app.use("/", indexROute);
 // Fix this to work with passport! The registration does not need to work, you can use the fake database for this.
 app.use("/auth", authRoute);
 
+<<<<<<< HEAD
 app.use("/photo", uploadRoute);
 
 app.listen(3001, function() {
@@ -72,3 +76,10 @@ app.listen(3001, function() {
         "Server running. Visit: localhost:3001/reminders in your browser 🚀"
     );
 });
+=======
+app.listen(3001, function () {
+  console.log(
+    "Server running. Visit: localhost:3001/reminders in your browser 🚀"
+  );
+});
+>>>>>>> main
