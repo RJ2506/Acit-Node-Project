@@ -3,7 +3,6 @@ const app = express();
 const path = require("path");
 const ejsLayouts = require("express-ejs-layouts");
 const reminderController = require("./controller/reminder_controller");
-const authController = require("./controller/auth_controller");
 const session = require("express-session");
 
 require("dotenv").config();
@@ -17,28 +16,33 @@ app.use(ejsLayouts);
 app.set("view engine", "ejs");
 
 app.use(
-  session({
-    secret: "secret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-      maxAge: 24 * 60 * 60 * 1000,
-    },
-  })
+    session({
+        secret: "secret",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            secure: false,
+            maxAge: 24 * 60 * 60 * 1000,
+        },
+    })
 );
 
+//import passport
 const passport = require("./middleware/passport");
+
+//import all routes
 const authRoute = require("./routes/authRoute");
 const indexROute = require("./routes/indexRoute");
 const uploadRoute = require("./routes/uploadRoute");
 
+//initialize the passports
 app.use(passport.localLogin.initialize());
 app.use(passport.localLogin.session());
 app.use(passport.githubLogin.initialize());
 app.use(passport.githubLogin.session());
 
+//import the authentication
 const { ensureAuthenticated, isAdmin } = require("./middleware/checkAuth.js");
 
 // Middleware for express
@@ -68,18 +72,12 @@ app.use("/", indexROute);
 // Fix this to work with passport! The registration does not need to work, you can use the fake database for this.
 app.use("/auth", authRoute);
 
-<<<<<<< HEAD
 app.use("/photo", uploadRoute);
 
-app.listen(3001, function() {
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, function() {
     console.log(
-        "Server running. Visit: localhost:3001/reminders in your browser 🚀"
+        `Server running. Visit: localhost:${PORT}/reminders in your browser `
     );
 });
-=======
-app.listen(3001, function () {
-  console.log(
-    "Server running. Visit: localhost:3001/reminders in your browser 🚀"
-  );
-});
->>>>>>> main
