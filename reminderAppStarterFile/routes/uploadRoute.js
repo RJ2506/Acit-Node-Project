@@ -25,9 +25,6 @@ router.use(cors());
 router.use(morgan("dev"));
 router.use(helmet());
 
-router.use(express.urlencoded({ extended: true }));
-router.use(json({ extended: false }));
-
 router.use(upload.any());
 
 router.get("/upload", ensureAuthenticated, (req, res) => {
