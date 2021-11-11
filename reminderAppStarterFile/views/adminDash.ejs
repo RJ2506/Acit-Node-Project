@@ -1,20 +1,24 @@
 <h1 class="mt-4">
     Admin Dashboard</h1>
 
-    <p class="lead mb-3">Welcome Admin!</p>
+<p class="lead mb-3">Welcome Admin!</p>
 
-    <div class="container">
-        <p>Current Active Sessions:</p>
-        <ul class="list-group">
-            <% Object.keys(session).forEach(function (sessionID) { %>
-                <li class="list-group-item">
-                    SessionID: <%= sessionID %> </br>
+<div class="container">
+    <p>Current Active Sessions:</p>
+    <ul class="list-group">
+        <% Object.keys(session).forEach(function (sessionID) { %>
+            <li class="list-group-item">
+                SessionID:
+                <%= sessionID %>
+                    </br>
                     <% data = JSON.parse(session[sessionID]) %>
-                    UserID: <%= data.passport.user %></br>
-                    <a href=<%= "/revoke/" + sessionID%>>Revoke Session</a>
-                </li>
+                        UserID:
+                        <%= data.passport.user %>
+                            </br>
+                            <a href=<%="/revoke/" + sessionID%>>Revoke Session</a>
+            </li>
             <% }) %>
-        </ul>
-    </div>
+    </ul>
+</div>
 
-    <a href="/auth/logout" class="btn btn-secondary">Logout</a>
+<a href="/auth/logout" class="mt-1  btn btn-secondary">Logout</a>
