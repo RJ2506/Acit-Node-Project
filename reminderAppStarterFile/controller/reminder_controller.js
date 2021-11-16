@@ -4,7 +4,6 @@ const user = require("../models/userModel").database;
 let remindersController = {
     list: (req, res) => {
         const username = req.user.name.replace(" ", "_");
-        console.log(database);
         res.render("reminder/index", {
             reminders: database[username].reminders,
         });

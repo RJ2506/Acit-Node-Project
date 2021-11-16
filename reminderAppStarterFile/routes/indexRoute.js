@@ -6,7 +6,6 @@ let reminder_database = require("../database");
 router.get("/dashboard", ensureAuthenticated, (req, res) => {
     const username = req.user.name.replace(" ", "_");
     let searchResult = reminder_database[username];
-    console.log(searchResult);
     if (searchResult) {
         res.render("dashboard", {
             user: req.user,
