@@ -42,3 +42,10 @@ Andrew Graystone:
 I worked on the following task:
 
 1. User's Should have a random profile picture generated for them when they sign up by using the UnsplashAPI. This profile picture should be saved in their profile.
+
+Rodolf John Gayem:
+I worked on the following tasks:
+ 
+1. Added the upload route and ejs page.
+2. Used multer to convert the image.
+3. Uploaded the image to imgur to get the url of the image.
