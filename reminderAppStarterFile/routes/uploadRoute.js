@@ -53,7 +53,7 @@ router.post("/upload/:id", async(req, res) => {
         fs.unlinkSync(`public/uploads/${file.filename}`);
         res.redirect("/dashboard");
     } catch (err) {
-        console.log("error", err);
+        res.status(404).jsonp("Please choose an image!");
     }
 });
 
