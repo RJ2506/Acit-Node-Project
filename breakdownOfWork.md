@@ -49,3 +49,11 @@ I worked on the following tasks:
 1. Added the upload route and ejs page.
 2. Used multer to convert the image.
 3. Uploaded the image to imgur to get the url of the image.
+
+November 25 (Fourth Sprint)
+ 
+Rodolf John Gayem
+I worked on the following tasks:
+ 
+1. Setting up the schema for prisma
+2. Converted all code that communicates with the Fake database and replaced with SQlite using Prisma
