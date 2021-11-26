@@ -1,28 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
-let reminder_database = require("../database");
 
-router.get("/dashboard", ensureAuthenticated, (req, res) => {
-    const username = req.user.name.replace(" ", "_");
-    let searchResult = reminder_database[username];
-    if (searchResult) {
-        res.render("dashboard", {
-            user: req.user,
-        });
-    } else {
-        reminder_database[username] = {
-            reminders: [],
-        };
-        res.render("dashboard", {
-            user: req.user,
-        });
-    }
+router.get("/dashboard", ensureAuthenticated, async(req, res) => {
+    const user = await req.user;
+    res.render("dashboard", {
+        user: user,
+    });
 });
 
-router.get("/admin", isAdmin, (req, res) => {
+router.get("/admin", isAdmin, async(req, res) => {
+    const user = await req.user;
     res.render("admin", {
-        user: req.user,
+        user: user,
     });
 });
 

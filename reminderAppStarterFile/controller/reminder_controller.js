@@ -1,88 +1,118 @@
-let database = require("../database");
-const user = require("../models/userModel").database;
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 let remindersController = {
-    list: (req, res) => {
-        const username = req.user.name.replace(" ", "_");
+    // retrieves the list in the database based on the user's id
+    list: async(req, res) => {
+        const user = await req.user;
+        const reminder_user = await prisma.reminder.findMany({
+            orderBy: { createdAt: "desc" },
+            include: { User: true },
+        });
+        console.log(reminder_user.reminders);
         res.render("reminder/index", {
-            reminders: database[username].reminders,
+            reminders: reminder_user,
         });
     },
 
+    // redirects to the reminder/create route when user wants to create a new reminders
     new: (req, res) => {
         res.render("reminder/create");
     },
 
-    revoke: (req, res) => {
-        let sessionToDestroy = req.params.id;
-        // console.log(sessionToDestroy);
-        // console.log(Object.keys(req.session.store));
+    revoke: async(req, res) => {
+        let sessionToDestroy = await req.params.id;
         req.sessionStore.destroy(sessionToDestroy, function(err) {
             console.log(err);
         });
         res.render("adminDash", { session: req.sessionStore.sessions });
     },
 
-    admin: (req, res) => {
-        // console.log(JSON.parse(req.sessionStore.sessions));
-        res.render("adminDash", { session: req.sessionStore.sessions });
+    admin: async(req, res) => {
+        const sessions = await req.sessionStore.sessions;
+        res.render("adminDash", { session: sessions });
     },
     //to view the reminder
-    listOne: (req, res) => {
-        let reminderToFind = req.params.id;
-        const username = req.user.name.replace(" ", "_");
-        let searchResult = database[username].reminders.find(function(reminder) {
-            return reminder.id == reminderToFind;
+    listOne: async(req, res) => {
+        const paramId = req.params.id;
+        let searchResult = await prisma.reminder.findUnique({
+            where: { id: paramId },
         });
         if (searchResult != undefined) {
             res.render("reminder/single-reminder", { reminderItem: searchResult });
         } else {
-            res.render("reminder/index", { reminders: database[username].reminders });
+            res.render("reminder/index", { reminders: "" });
         }
     },
 
-    create: (req, res) => {
-        const username = req.user.name.replace(" ", "_");
-        let reminder = {
-            id: database[username].reminders.length + 1,
-            title: req.body.title,
-            description: req.body.description,
-            completed: false,
-        };
-        database[username].reminders.push(reminder);
-        res.redirect("/reminders");
+    create: async(req, res) => {
+        const user_email = await req.user;
+
+        const { title, description } = await req.body;
+        try {
+            const user = await prisma.reminder.create({
+                data: {
+                    title: title,
+                    description: description,
+                    completed: false,
+                    User: {
+                        connect: {
+                            email: user_email.email,
+                        },
+                    },
+                },
+            });
+            res.redirect("/reminders");
+        } catch (err) {
+            res.status(404).jsonp("title already exist!");
+        }
     },
 
-    edit: (req, res) => {
+    edit: async(req, res) => {
         let reminderToFind = req.params.id;
-        const username = req.user.name.replace(" ", "_");
-        let searchResult = database[username].reminders.find(function(reminder) {
-            return reminder.id == reminderToFind;
-        });
-        res.render("reminder/edit", { reminderItem: searchResult });
+        try {
+            let searchResult = await prisma.reminder.findUnique({
+                where: { id: reminderToFind },
+            });
+            res.render("reminder/edit", { reminderItem: searchResult });
+        } catch (err) {
+            res.status(404).jsonp(err);
+        }
     },
 
-    update: (req, res) => {
-        const username = req.user.name.replace(" ", "_");
-        let reminderToUpdate = req.params.id;
-        database[username].reminders[reminderToUpdate - 1] = {
-            id: reminderToUpdate,
-            title: req.body.title,
-            description: req.body.description,
-            completed: req.body.completed === "true",
-        };
-        res.redirect("/reminders");
+    update: async(req, res) => {
+        let reminderToFind = req.params.id;
+        const { title, description, completed } = req.body;
+        try {
+            let searchResult = await prisma.reminder.findUnique({
+                where: { id: reminderToFind },
+            });
+
+            searchResult = await prisma.reminder.update({
+                where: { id: reminderToFind },
+                data: {
+                    title,
+                    description,
+                    completed: completed === "true",
+                },
+            });
+            res.redirect("/reminders");
+        } catch (err) {
+            res.status(404).jsonp(err);
+        }
     },
 
-    delete: (req, res) => {
+    delete: async(req, res) => {
         // Implement this code
-        const username = req.user.name.replace(" ", "_");
-        let reminderToDelete = req.params.id;
-        let reminderIndex = database[username].reminders.findIndex(
-            (item) => item.id == reminderToDelete
-        );
-        database[username].reminders.splice(reminderIndex, 1);
-        res.redirect("/reminders");
+        let reminderToFind = req.params.id;
+        try {
+            let searchResult = await prisma.reminder.delete({
+                where: { id: reminderToFind },
+            });
+            res.redirect("/reminders");
+        } catch (err) {
+            res.status(404).jsonp(err);
+        }
     },
 };
 

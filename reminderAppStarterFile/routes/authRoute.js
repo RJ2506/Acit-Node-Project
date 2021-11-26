@@ -2,8 +2,8 @@ const express = require("express");
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
 const fetch = require("node-fetch");
-let { database } = require("../models/userModel.js");
-let reminder_database = require("../database");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 const router = express.Router();
 
@@ -31,24 +31,24 @@ router.post("/register", (req, res) => {
             `https://api.unsplash.com/photos/random?client_id=${process.env.unsplashClientID}`
         )
         .then((response) => response.json())
-        .then((data) => {
+        .then(async(data) => {
             const urls = data.urls;
             photo_URL = urls.thumb;
-            database.push({
-                id: database.length + 1,
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                photo: photo_URL,
+            const { name, email, password } = req.body;
+            const user = await prisma.user.create({
+                data: { name, email, role: "user", photo: photo_URL, password },
             });
-            database["password"] = req.body.password;
+
             res.render("auth/login");
+        })
+        .catch((err) => {
+            res.status(404).jsonp("email is already been taken!");
         });
 });
 
 router.get(
     "/github",
-    passport.githubLogin.authenticate("github", { scope: ["profile"] })
+    passport.githubLogin.authenticate("github", { scope: ["user:email"] })
 );
 
 router.get(

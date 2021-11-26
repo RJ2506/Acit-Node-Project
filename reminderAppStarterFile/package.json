@@ -1,38 +1,47 @@
 {
-  "name": "reminderlist",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon"
-  },
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "author": "",
-  "license": "ISC",
-  "homepage": "http",
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "ejs": "^2.5.5",
-    "express": "^4.14.0",
-    "express-ejs-layouts": "^2.2.0",
-    "express-layouts": "^1.0.0",
-    "express-session": "^1.17.2",
-    "helmet": "^4.6.0",
-    "imgur": "^1.0.2",
-    "method-override": "^2.3.7",
-    "mongoose": "^6.0.12",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.3",
-    "node-fetch": "^2.6.6",
-    "nodemon": "^2.0.15",
-    "passport": "^0.5.0",
-    "passport-github2": "^0.1.12",
-    "passport-local": "^1.0.0"
-  }
+    "name": "reminderlist",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon",
+        "migrate": "npx prisma migrate dev",
+        "studio": "npx prisma studio"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "",
+    "license": "ISC",
+    "homepage": "http",
+    "dependencies": {
+        "@prisma/client": "^3.5.0",
+        "alert": "^5.0.10",
+        "body-parser": "^1.15.2",
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "ejs": "^2.5.5",
+        "express": "^4.14.0",
+        "express-ejs-layouts": "^2.2.0",
+        "express-layouts": "^1.0.0",
+        "express-session": "^1.17.2",
+        "helmet": "^4.6.0",
+        "imgur": "^1.0.2",
+        "method-override": "^2.3.7",
+        "mongoose": "^6.0.12",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.3",
+        "mysql": "^2.18.1",
+        "node-fetch": "^2.6.6",
+        "nodemon": "^2.0.15",
+        "passport": "^0.5.0",
+        "passport-github2": "^0.1.12",
+        "passport-local": "^1.0.0",
+        "sqlite": "^4.0.23"
+    },
+    "devDependencies": {
+        "prisma": "^3.5.0"
+    }
 }

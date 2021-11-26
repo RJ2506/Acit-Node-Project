@@ -1,44 +1,44 @@
 const { userModel, userGit } = require("../models/userModel");
 
-const getUserByEmailIdAndPassword = (email, password) => {
-  let user = userModel.findOne(email);
-  if (user) {
-    if (isUserValid(user, password)) {
-      return user;
+const getUserByEmailIdAndPassword = async(email, password) => {
+    let user = await userModel.findOne(email);
+    if (user) {
+        if (isUserValid(user, password)) {
+            return user;
+        }
     }
-  }
-  return null;
+    return null;
 };
-const getUserById = (id) => {
-  let user = userModel.findById(id);
-  if (user) {
-    return user;
-  }
-  return null;
+const getUserById = async(id) => {
+    let user = await userModel.findById(id);
+    if (user) {
+        return user;
+    }
+    return null;
 };
 const getUserGit = (profile) => {
-  let user = userGit.findById(profile);
-  if (user) {
-    return user;
-  }
-  return null;
+    let user = userGit.findById(profile);
+    if (user) {
+        return user;
+    }
+    return null;
 };
 
-const getUserByRole = (role) => {
-  let user = userModel.findByRole(role);
-  if (user) {
-    return user;
-  }
-  return null;
+const getUserByRole = async(role) => {
+    let user = await userModel.findByRole(role);
+    if (user) {
+        return user;
+    }
+    return null;
 };
 
-function isUserValid(user, password) {
-  return user.password === password;
-}
+const isUserValid = (user, password) => {
+    return user.password === password;
+};
 
 module.exports = {
-  getUserByEmailIdAndPassword,
-  getUserById,
-  getUserGit,
-  getUserByRole,
+    getUserByEmailIdAndPassword,
+    getUserById,
+    getUserGit,
+    getUserByRole,
 };

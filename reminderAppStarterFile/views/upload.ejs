@@ -2,9 +2,8 @@
     <img src="/default.jpg" alt="profile picture" width="20%">
 </h2>
 
-<form action="/photo/upload" method="post" enctype="multipart/form-data">
-    <input class="text-primary" type="file" name="image" id="file">
-    <script src="../public/script"></script>
-    <br>
-    <input class="mt-2 btn-secondary" type="submit" value="Submit">
+<form action="/photo/upload/<%=user.id%>" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
+    <input class="text-primary" type="file" name="image" id="file"><br>
+    <button type="submit" class="mt-2 btn-secondary">Submit</button>
 </form>

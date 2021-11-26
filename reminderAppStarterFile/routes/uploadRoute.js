@@ -6,6 +6,8 @@ const cors = require("cors");
 const multer = require("multer");
 const imgur = require("imgur");
 const fs = require("fs");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 const { ensureAuthenticated } = require("../middleware/checkAuth");
 const { json } = require("body-parser");
@@ -27,16 +29,27 @@ router.use(helmet());
 
 router.use(upload.any());
 
-router.get("/upload", ensureAuthenticated, (req, res) => {
-    res.render("upload");
+router.get("/upload", ensureAuthenticated, async(req, res) => {
+    const user_id = await req.user;
+    res.render("upload", { user: user_id });
 });
 
-router.post("/upload", async(req, res) => {
-    const profile = req.user;
+router.post("/upload/:id", async(req, res) => {
+    const id = req.params.id;
+
     const file = req.files[0];
     try {
         const url = await imgur.uploadFile(`public/uploads/${file.filename}`);
-        profile.photo = url.link;
+        let searchResult = await prisma.user.findFirst({
+            where: { id: id },
+        });
+        searchResult = await prisma.user.update({
+            where: { id: id },
+            data: {
+                photo: url.link,
+            },
+        });
+
         fs.unlinkSync(`public/uploads/${file.filename}`);
         res.redirect("/dashboard");
     } catch (err) {
