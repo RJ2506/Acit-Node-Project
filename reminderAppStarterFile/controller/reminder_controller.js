@@ -6,10 +6,14 @@ let remindersController = {
     list: async(req, res) => {
         const user = await req.user;
         const reminder_user = await prisma.reminder.findMany({
+            where: {
+                User: {
+                    id: user.id,
+                },
+            },
             orderBy: { createdAt: "desc" },
             include: { User: true },
         });
-        console.log(reminder_user.reminders);
         res.render("reminder/index", {
             reminders: reminder_user,
         });
@@ -46,7 +50,7 @@ let remindersController = {
     },
 
     create: async(req, res) => {
-        const user_email = await req.user;
+        const user_id = await req.user;
 
         const { title, description } = await req.body;
         try {
@@ -57,7 +61,7 @@ let remindersController = {
                     completed: false,
                     User: {
                         connect: {
-                            email: user_email.email,
+                            id: user_id.id,
                         },
                     },
                 },
