@@ -51,6 +51,10 @@ I worked on the following tasks:
 3. Uploaded the image to imgur to get the url of the image.
 
 November 25 (Fourth Sprint)
+
+Andrew Graystone:
+I worked on the following task:
+1. Setting up the schema for prisma.
  
 Rodolf John Gayem
 I worked on the following tasks:
